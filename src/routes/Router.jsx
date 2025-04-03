@@ -1,11 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-  Navigate,
-} from "react-router-dom"; // → Routes, Navigate に置換
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom"; // → Routes, Navigate に置換
 
 import { Home } from "../pages/Home";
 import { NotFound } from "../pages/NotFound";
