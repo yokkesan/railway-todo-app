@@ -13,6 +13,7 @@ export const EditTask = () => {
   const [title, setTitle] = useState("");
   const [detail, setDetail] = useState("");
   const [isDone, setIsDone] = useState();
+  const [limit, setLimit] = useState("");//期限追加
   const [errorMessage, setErrorMessage] = useState("");
   const handleTitleChange = (e) => setTitle(e.target.value);
   const handleDetailChange = (e) => setDetail(e.target.value);
@@ -23,6 +24,7 @@ export const EditTask = () => {
       title: title,
       detail: detail,
       done: isDone,
+      limit: new Date(limit).toISOString(),//期限追加
     };
 
     axios
@@ -67,6 +69,7 @@ export const EditTask = () => {
         setTitle(task.title);
         setDetail(task.detail);
         setIsDone(task.done);
+        setLimit(task.limit?.slice(0, 16));
       })
       .catch((err) => {
         setErrorMessage(`タスク情報の取得に失敗しました。${err}`);
@@ -96,6 +99,15 @@ export const EditTask = () => {
             onChange={handleDetailChange}
             className="edit-task-detail"
             value={detail}
+          />
+          <br />
+          <label>期限</label>
+          <br />
+          <input
+            type="datetime-local"
+            className="edit-task-limit"
+            value={limit}
+            onChange={(e) => setLimit(e.target.value)}
           />
           <br />
           <div>
