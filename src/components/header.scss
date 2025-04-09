@@ -7,9 +7,34 @@
   color: #ffffff;
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
 }
 
 .sign-out-button {
   color: #ffffff;
-  margin: auto 25px auto auto;
+  margin-left: auto;
+  font-size: 16px;
+}
+
+/* ▼ スマートフォン対応 */
+@media screen and (max-width: 480px) {
+  .header {
+    flex-direction: column;
+    height: auto;
+    padding: 10px;
+    text-align: center;
+  }
+
+  .sign-out-button {
+    margin: 10px 0 0 0;
+    font-size: 14px;
+  }
+}
+
+/* ▼ タブレット対応（ */
+@media screen and (max-width: 768px) {
+  .sign-out-button {
+    font-size: 15px;
+  }
 }

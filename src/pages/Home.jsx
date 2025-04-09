@@ -14,7 +14,7 @@ export const Home = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const [cookies] = useCookies();
   const handleIsDoneDisplayChange = (e) => setIsDoneDisplay(e.target.value);
-  
+
   //起動時にログインユーザのTodo表示
   useEffect(() => {
     axios
@@ -30,7 +30,7 @@ export const Home = () => {
         setErrorMessage(`リストの取得に失敗しました。${err}`);
       });
   }, []);
-//最初のリストを選択状態にして、習得
+  //最初のリストを選択状態にして、習得
   useEffect(() => {
     const listId = lists[0]?.id;
     if (typeof listId !== "undefined") {
@@ -49,7 +49,7 @@ export const Home = () => {
         });
     }
   }, [lists]);
-//ユーザーが別のリストを選択した時
+  //ユーザーが別のリストを選択した時
   const handleSelectList = (id) => {
     setSelectListId(id);
     axios
@@ -82,6 +82,7 @@ export const Home = () => {
               </p>
             </div>
           </div>
+
           <ul className="list-tab">
             {lists.map((list, key) => {
               const isActive = list.id === selectListId;
@@ -90,6 +91,28 @@ export const Home = () => {
                   key={key}
                   className={`list-tab-item ${isActive ? "active" : ""}`}
                   onClick={() => handleSelectList(list.id)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      handleSelectList(list.id);
+                    }
+                    // 左右矢印キーでリスト切り替え
+                    if (e.key === "ArrowRight") {
+                      const nextIndex = (key + 1) % lists.length;
+                      handleSelectList(lists[nextIndex].id);
+                      // 次の要素にフォーカスを移動
+                      document.querySelectorAll(".list-tab-item")[nextIndex].focus();
+                    }
+                    if (e.key === "ArrowLeft") {
+                      const prevIndex = (key - 1 + lists.length) % lists.length;
+                      handleSelectList(lists[prevIndex].id);
+                      // 前の要素にフォーカスを移動
+                      document.querySelectorAll(".list-tab-item")[prevIndex].focus();
+                    }
+                  }}
+                  role="button"
+                  tabIndex="0"
+                  aria-pressed={isActive}
+                  aria-label={`リスト ${list.title}`}
                 >
                   {list.title}
                 </li>

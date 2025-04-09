@@ -31,3 +31,32 @@
 .error-message {
   color: #ff3333;
 }
+
+/* ▼ スマートフォン対応（iPhone SE など） */
+@media screen and (max-width: 480px) {
+  .edit-list {
+    width: 90%;
+    margin: 0 auto;
+  }
+
+  .edit-list-title {
+    width: 100%;
+  }
+
+  .delete-list-button,
+  .edit-list-button {
+    width: 100%;
+    margin: 10px 0;
+  }
+}
+
+/* ▼ タブレット対応（iPad など） */
+@media screen and (max-width: 768px) {
+  .edit-list {
+    width: 95%;
+  }
+
+  .edit-list-title {
+    width: 100%;
+  }
+}
