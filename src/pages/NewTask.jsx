@@ -11,20 +11,20 @@ export const NewTask = () => {
   const [lists, setLists] = useState([]);
   const [title, setTitle] = useState("");
   const [detail, setDetail] = useState("");
-  const [limit, setLimit] = useState("");//期限の状態追加
+  const [limit, setLimit] = useState(""); //期限の状態追加
   const [errorMessage, setErrorMessage] = useState("");
   const [cookies] = useCookies();
   const navigate = useNavigate();
   const handleTitleChange = (e) => setTitle(e.target.value);
   const handleDetailChange = (e) => setDetail(e.target.value);
-  const handleLimitChange = (e) => setLimit(e.target.value);//日時処理
+  const handleLimitChange = (e) => setLimit(e.target.value); //日時処理
   const handleSelectList = (id) => setSelectListId(id);
   const onCreateTask = () => {
     const data = {
       title: title,
       detail: detail,
       done: false,
-      limit: new Date(limit).toISOString(),
+      limit: new Date(limit).toISOString(), //追加
     };
 
     axios
@@ -77,18 +77,20 @@ export const NewTask = () => {
             ))}
           </select>
           <br />
-          <label>タイトル</label><br />
-          <input type="text" onChange={handleTitleChange} className="new-task-title" /><br />
+          <label>タイトル</label>
+          <br />
+          <input type="text" onChange={handleTitleChange} className="new-task-title" />
+          <br />
 
-          <label>詳細</label><br />
-          <textarea type="text" onChange={handleDetailChange} className="new-task-detail" /><br />
+          <label>詳細</label>
+          <br />
+          <textarea type="text" onChange={handleDetailChange} className="new-task-detail" />
+          <br />
 
-          <label>期限</label><br />
-          <input
-            type="datetime-local"
-            onChange={handleLimitChange}
-            className="new-task-limit"
-          /><br />
+          <label>期限</label>
+          <br />
+          <input type="datetime-local" onChange={handleLimitChange} className="new-task-limit" />
+          <br />
 
           <button type="button" className="new-task-button" onClick={onCreateTask}>
             作成

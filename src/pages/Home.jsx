@@ -4,9 +4,10 @@ import { useCookies } from "react-cookie";
 import axios from "axios";
 import { Header } from "../components/Header";
 import { url } from "../const";
+import PropTypes from 'prop-types'; // 追加
 import "./home.scss";
 
-export const Home = () => {
+export const Home = (props) => {
   const [isDoneDisplay, setIsDoneDisplay] = useState("todo"); // todo->未完了 done->完了
   const [lists, setLists] = useState([]);
   const [selectListId, setSelectListId] = useState();
@@ -65,6 +66,7 @@ export const Home = () => {
         setErrorMessage(`タスクの取得に失敗しました。${err}`);
       });
   };
+
   return (
     <div>
       <Header />
@@ -142,6 +144,7 @@ export const Home = () => {
 const Tasks = (props) => {
   const { tasks, selectListId, isDoneDisplay } = props;
   if (tasks === null) return <></>;
+  //期限
   const getRemainingTime = (limit) => {
     const now = new Date();
     const deadline = new Date(limit);
@@ -176,4 +179,18 @@ const Tasks = (props) => {
       ))}
     </ul>
   );
+};
+
+// Home.propTypes 追加
+Home.propTypes = {
+  tasks: PropTypes.array.isRequired,
+  selectListId: PropTypes.string.isRequired,
+  isDoneDisplay: PropTypes.string.isRequired,
+};
+
+// Tasks.propTypes 追加
+Tasks.propTypes = {
+  tasks: PropTypes.array.isRequired,
+  selectListId: PropTypes.string.isRequired,
+  isDoneDisplay: PropTypes.string.isRequired,
 };
